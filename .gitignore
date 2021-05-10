@@ -1,3 +1,4 @@
 /.idea
-/src/main/java/com/mycompany/perscriptumtest/CredentialsClass.java
+/src/main/java/com/solidsolutions/test/CredentialsClass.java
 /logs
+/target/

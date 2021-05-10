@@ -5,17 +5,49 @@
  */
 package com.mycompany.perscriptumtest;
 
+import com.solidsolutions.test.HelperClass;
+import com.solidsolutions.test.SchemasClass;
+import java.io.File;
+import javax.swing.ButtonGroup;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author maxim
  */
 public class MainFraimClass extends javax.swing.JFrame {
 
+    ButtonGroup bgroup;
+    
+    public static final int CHANGE_CHROME_BROWSER = 1;
+    public static final int CHANGE_FIREFOX_BROWSER = 2;
+    public static int CURRENT_BROWSER = 1;
+    
+    public HelperClass helperClass = new HelperClass();
+    public final String appName = "«Solid Sulutions automatic site testing»";
+    public String pathToLogFile;
+    public String osName;
+    public File fileToWriteLogsOfTesting;
+    public File fileToWriteErrorLogOfTesting;
+    public String dateTimeOfSession;
+    private JFrame frame = null;
+    
     /**
      * Creates new form MainFraimClass
      */
     public MainFraimClass() {
         initComponents();
+        bgroup = new ButtonGroup();
+        bgroup.add(jRadioButtonAllCandidates);
+        bgroup.add(jRadioButtonRndCandidate);
+        bgroup.add(jRadioButtonShema);
+        fillData();
+        //frame = new JFrame();
+        frame = this;
+        
+        JOptionPane.showMessageDialog(frame, "START");
     }
 
     /**
@@ -29,6 +61,11 @@ public class MainFraimClass extends javax.swing.JFrame {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
+        jRadioButtonRndCandidate = new javax.swing.JRadioButton();
+        jRadioButtonAllCandidates = new javax.swing.JRadioButton();
+        jRadioButtonShema = new javax.swing.JRadioButton();
+        jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -38,15 +75,54 @@ public class MainFraimClass extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jRadioButtonRndCandidate.setText("Create random candidate");
+
+        jRadioButtonAllCandidates.setText("Create all 4 type of candidates");
+
+        jRadioButtonShema.setText("Create Shema");
+
+        jButton1.setText("Start test");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("jLabel1");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 356, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jRadioButtonRndCandidate)
+                            .addComponent(jRadioButtonAllCandidates)
+                            .addComponent(jRadioButtonShema))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 121, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 226, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(jRadioButtonRndCandidate)
+                .addGap(18, 18, 18)
+                .addComponent(jRadioButtonAllCandidates)
+                .addGap(18, 18, 18)
+                .addComponent(jRadioButtonShema)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 270, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jLabel1))
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Creation tests", jPanel1);
@@ -55,11 +131,11 @@ public class MainFraimClass extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 356, Short.MAX_VALUE)
+            .addGap(0, 533, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 226, Short.MAX_VALUE)
+            .addGap(0, 446, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Other tests", jPanel2);
@@ -98,8 +174,8 @@ public class MainFraimClass extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         pack();
@@ -109,6 +185,33 @@ public class MainFraimClass extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.exit(1);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        String message = "";
+        if (jRadioButtonRndCandidate.isSelected()) {
+            message = "Start random candidate creation test";
+            
+        } else if (jRadioButtonAllCandidates.isSelected()) {
+            message = "Start ALL 4 candidates creation test";
+        } else if (jRadioButtonShema.isSelected()) {
+            message = "Start Shema creation test";
+            Thread t = new Thread() {
+                public void run() {
+                    SchemasClass schemasClass = new SchemasClass(pathToLogFile, osName);
+                    try {
+                    schemasClass.createSchema();
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(frame, "Error");
+                    }
+                }
+            };
+            t.start();
+        } else {
+            message = "Empy choice";
+        }
+        jLabel1.setText(message);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -146,6 +249,8 @@ public class MainFraimClass extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -153,6 +258,61 @@ public class MainFraimClass extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JRadioButton jRadioButtonAllCandidates;
+    private javax.swing.JRadioButton jRadioButtonRndCandidate;
+    private javax.swing.JRadioButton jRadioButtonShema;
     private javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
+
+    private void fillData() {
+        String fileName = "";
+        String fileNameERRORS = "";
+        dateTimeOfSession = helperClass.getDateInStringForWindowsLinux(); 
+        
+        osName = System.getProperty("os.name");
+        File theDirectoryForLogFiles = null;
+        if (osName.contains("Linux")) {
+//            System.out.println("OS Linux detected. Trying to create a folder for log files in the same folder as the executable file");
+//            System.out.println("Please make sure the appropriate chromedriver exists along the path /usr/bin/chromedriver");    
+//            System.out.println("Please make sure the appropriate geckodriver exists along the path /usr/bin/geckodriver");  
+//            System.out.println("Please make sure the appropriate chromedriver exists in the folder with jar file"); 
+//            System.out.println("Visit URL https://chromedriver.chromium.org/downloads to download if you have no chromedriver!");             
+            pathToLogFile = "./logs/";                        
+            
+            System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");      
+            System.setProperty("webdriver.gecko.driver", "/usr/bin/geckodriver");
+            
+        } else if (osName.contains("Windows")) {
+//            System.out.println("Please make sure the appropriate chromedriver exists along the path C:\\users\\public\\documents\\chromedriver.exe"); 
+//            System.out.println("OS Windows detected, try to create log folder in C:\\users\\public\\documents\\logs");
+            pathToLogFile = "C:\\users\\public\\documents\\logs\\";            
+            
+            System.setProperty("webdriver.chrome.driver", "C:\\users\\public\\documents\\chromedriver.exe");
+            System.setProperty("webdriver.gecko.driver", "C:\\users\\public\\documents\\geckodriver.exe");
+            
+        } else {
+            pathToLogFile = "./";
+        }
+        
+        try {
+            theDirectoryForLogFiles = new File(pathToLogFile);
+            theDirectoryForLogFiles.mkdirs();
+            //System.out.println("Create folder for log files at path " + pathToLogFile);
+        } catch (Exception ex) {
+            //System.out.println("ERROR with creation of the folder for log files at path " + pathToLogFile);            
+        }        
+        
+        fileName = pathToLogFile + "mainApplicationLog_" + dateTimeOfSession + ".txt";
+        fileNameERRORS = pathToLogFile + "mainApplicationLog_ERRORS_" + dateTimeOfSession + ".txt";        
+        
+        try {
+            fileToWriteLogsOfTesting = new File(fileName);
+            fileToWriteErrorLogOfTesting = new File(fileNameERRORS);
+            //System.out.println("Path to logfile:" + fileName);
+        } catch (Exception exx) {
+            //System.out.println(exx.getMessage());
+            //System.out.println("Error file creation, test log will be only in terminal");
+        }
+       
+    }
 }
