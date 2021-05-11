@@ -24,7 +24,8 @@ import javax.swing.JOptionPane;
  */
 public class MainFraimClass extends javax.swing.JFrame {
 
-    ButtonGroup bgroup;
+    ButtonGroup bgroupCreation;
+    ButtonGroup bgroupSortSearchEdit;
     
     public static final int CHANGE_CHROME_BROWSER = 1;
     public static final int CHANGE_FIREFOX_BROWSER = 2;
@@ -45,13 +46,19 @@ public class MainFraimClass extends javax.swing.JFrame {
      */
     public MainFraimClass() {
         initComponents();
-        bgroup = new ButtonGroup();
-        bgroup.add(jRadioButtonAllCandidates);
-        bgroup.add(jRadioButtonRndCandidate);
-        bgroup.add(jRadioButtonShema);
-        bgroup.add(jRadioButtonLocations);
-        bgroup.add(jRadioButtonCreateCompany);
-        bgroup.add(jRadioButtonAllCreationTests);
+        bgroupCreation = new ButtonGroup();
+        bgroupCreation.add(jRadioButtonAllCandidates);
+        bgroupCreation.add(jRadioButtonRndCandidate);
+        bgroupCreation.add(jRadioButtonShema);
+        bgroupCreation.add(jRadioButtonLocations);
+        bgroupCreation.add(jRadioButtonCreateCompany);
+        bgroupCreation.add(jRadioButtonAllCreationTests);
+        
+        bgroupSortSearchEdit = new ButtonGroup();
+        bgroupSortSearchEdit.add(jRadioButtonSorting);
+        bgroupSortSearchEdit.add(jRadioButtonSearch);
+        bgroupSortSearchEdit.add(jRadioButtonSpeedLoad);
+        bgroupSortSearchEdit.add(jRadioButtonProfileEdit);
         fillData();
         //frame = new JFrame();
         frame = this;
@@ -82,6 +89,12 @@ public class MainFraimClass extends javax.swing.JFrame {
         jRadioButtonCreateCompany = new javax.swing.JRadioButton();
         jRadioButtonAllCreationTests = new javax.swing.JRadioButton();
         jPanel2 = new javax.swing.JPanel();
+        jRadioButtonSearch = new javax.swing.JRadioButton();
+        jRadioButtonSorting = new javax.swing.JRadioButton();
+        jRadioButtonSpeedLoad = new javax.swing.JRadioButton();
+        jRadioButtonProfileEdit = new javax.swing.JRadioButton();
+        jButtonOtherTests = new javax.swing.JButton();
+        jLabelResOther = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextAreaInformation = new javax.swing.JTextArea();
@@ -161,15 +174,57 @@ public class MainFraimClass extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Creation tests", jPanel1);
 
+        jRadioButtonSearch.setText("Test Search");
+
+        jRadioButtonSorting.setText("Test Sorting");
+
+        jRadioButtonSpeedLoad.setText("Test speed of load");
+
+        jRadioButtonProfileEdit.setText("Profile edit");
+
+        jButtonOtherTests.setText("Start test");
+        jButtonOtherTests.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonOtherTestsActionPerformed(evt);
+            }
+        });
+
+        jLabelResOther.setText("Result");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 533, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jRadioButtonSpeedLoad)
+                    .addComponent(jRadioButtonSorting)
+                    .addComponent(jRadioButtonSearch)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButtonOtherTests)
+                            .addComponent(jRadioButtonProfileEdit))
+                        .addGap(88, 88, 88)
+                        .addComponent(jLabelResOther, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 446, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addComponent(jRadioButtonSearch)
+                .addGap(18, 18, 18)
+                .addComponent(jRadioButtonSorting)
+                .addGap(18, 18, 18)
+                .addComponent(jRadioButtonSpeedLoad)
+                .addGap(18, 18, 18)
+                .addComponent(jRadioButtonProfileEdit)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 213, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonOtherTests)
+                    .addComponent(jLabelResOther))
+                .addGap(36, 36, 36))
         );
 
         jTabbedPane1.addTab("Other tests", jPanel2);
@@ -355,6 +410,19 @@ public class MainFraimClass extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(frame, "Solid Solutions site tester. \nAll rights reserved.");
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    private void jButtonOtherTestsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOtherTestsActionPerformed
+        // TODO add your handling code here:
+        if (jRadioButtonSearch.isSelected()) {
+            jLabelResOther.setText("Search");
+        } else if (jRadioButtonSorting.isSelected()) {
+            jLabelResOther.setText("Sorting");
+        } else if (jRadioButtonSpeedLoad.isSelected()) {
+            jLabelResOther.setText("Speed load");
+        } else if (jRadioButtonProfileEdit.isSelected()) {
+            jLabelResOther.setText("Profile edit");
+        }
+    }//GEN-LAST:event_jButtonOtherTestsActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -392,7 +460,9 @@ public class MainFraimClass extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonOtherTests;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabelResOther;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -406,8 +476,12 @@ public class MainFraimClass extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButtonAllCreationTests;
     private javax.swing.JRadioButton jRadioButtonCreateCompany;
     private javax.swing.JRadioButton jRadioButtonLocations;
+    private javax.swing.JRadioButton jRadioButtonProfileEdit;
     private javax.swing.JRadioButton jRadioButtonRndCandidate;
+    private javax.swing.JRadioButton jRadioButtonSearch;
     private javax.swing.JRadioButton jRadioButtonShema;
+    private javax.swing.JRadioButton jRadioButtonSorting;
+    private javax.swing.JRadioButton jRadioButtonSpeedLoad;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextArea jTextAreaInformation;
