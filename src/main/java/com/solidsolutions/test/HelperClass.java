@@ -498,6 +498,7 @@ public class HelperClass {
     }
     
     public void printToFileAndConsoleInformation(File logFile, String message) {
+        if (message == null) message = "NULL REPLACED!";
         writeStringToFile(logFile, message);
         System.out.println(message);
     }
@@ -509,4 +510,31 @@ public class HelperClass {
         inputToClear.sendKeys(Keys.DELETE);
         Thread.sleep(500);
     }
+    
+//    public String setSystemPropertyAndGetPathToLogsFolder(String osName) {
+//        String pathToLogFile = "";
+//        if (osName.contains("Linux")) {
+////            System.out.println("OS Linux detected. Trying to create a folder for log files in the same folder as the executable file");
+////            System.out.println("Please make sure the appropriate chromedriver exists along the path /usr/bin/chromedriver");    
+////            System.out.println("Please make sure the appropriate geckodriver exists along the path /usr/bin/geckodriver");  
+////            System.out.println("Please make sure the appropriate chromedriver exists in the folder with jar file"); 
+////            System.out.println("Visit URL https://chromedriver.chromium.org/downloads to download if you have no chromedriver!");             
+//            pathToLogFile = "./logs/";                        
+//            
+//            System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");      
+//            System.setProperty("webdriver.gecko.driver", "/usr/bin/geckodriver");
+//            
+//        } else if (osName.contains("Windows")) {
+////            System.out.println("Please make sure the appropriate chromedriver exists along the path C:\\users\\public\\documents\\chromedriver.exe"); 
+////            System.out.println("OS Windows detected, try to create log folder in C:\\users\\public\\documents\\logs");
+//            pathToLogFile = "C:\\users\\public\\documents\\logs\\";            
+//            
+//            System.setProperty("webdriver.chrome.driver", "C:\\users\\public\\documents\\chromedriver.exe");
+//            System.setProperty("webdriver.gecko.driver", "C:\\users\\public\\documents\\geckodriver.exe");
+//            
+//        } else {
+//            pathToLogFile = "./";
+//        }
+//        return pathToLogFile;
+//    }
 }

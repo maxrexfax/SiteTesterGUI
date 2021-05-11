@@ -13,6 +13,7 @@ package com.solidsolutions.test;
 import com.mycompany.perscriptumtest.MainFraimClass;
 import java.io.File;
 import java.util.List;
+import javax.swing.JOptionPane;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
@@ -44,17 +45,49 @@ public class SchemasClass {
     public String dateTimeOfSession;
     private String osName;
     
-    public SchemasClass(String pathToFileFolderIn, String osNameIn) {
-        this.pathToLogFileFolder = pathToFileFolderIn;
-        this.osName = osNameIn;
+    
+    public SchemasClass() {
+        osName = System.getProperty("os.name");
+       // JOptionPane.showMessageDialog(MainFraimClass.frameStat, "Empty constructor SchemasClass, osName:" + osName);
     }
     
+    public SchemasClass(String pathToFileFolderIn, String osNameIn) {
+        osName = System.getProperty("os.name");
+        //JOptionPane.showMessageDialog(MainFraimClass.frameStat, "Constructor SchemasClass with arguments, osName:" + osName);
+    }
+    
+//    public static void main(String[] args) throws InterruptedException {
+//        // body of main method follows
+//        
+//        SchemasClass schemasClass = new SchemasClass();
+//        schemasClass.createSchema();
+//    }
+    public class FooException extends Exception {
+        public FooException() { super(); }
+        public FooException(String message) { super(message); }
+        public FooException(String message, Throwable cause) { super(message, cause); }
+        public FooException(Throwable cause) { super(cause); }
+      }
+    
     public void createSchema() throws InterruptedException
-    {
+    {              
+        prepareSystemData();
         credentialsClass = new CredentialsClass();
         dateTimeOfSession = helperClass.getDateInStringForWindowsLinux();    
         String fileName = "";
         String fileNameERRORS = "";
+        
+        if (osName.contains("Linux")) {
+            pathToLogFileFolder = "./logs/";
+            System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");      
+            System.setProperty("webdriver.gecko.driver", "/usr/bin/geckodriver");
+            
+        } else if (osName.contains("Windows")) {
+            pathToLogFileFolder = "C:\\users\\public\\documents\\logs\\";                        
+            System.setProperty("webdriver.chrome.driver", "C:\\users\\public\\documents\\chromedriver.exe");
+            System.setProperty("webdriver.gecko.driver", "C:\\users\\public\\documents\\geckodriver.exe");
+            
+        }
         
         fileName = this.pathToLogFileFolder + "testShemasCreationLogFile_" + dateTimeOfSession + ".txt";
         fileNameERRORS = this.pathToLogFileFolder + "testShemasCreationLogFile_ERRORS_" + dateTimeOfSession + ".txt";        
@@ -70,10 +103,14 @@ public class SchemasClass {
         
         helperClass.printToFileAndConsoleInformation(fileToWriteLogsOfTesting, "Shema creation testing starts at: " + dateTimeOfSession +" OS: " + osName);        
         
+        
         try {
+            
             if(MainFraimClass.CURRENT_BROWSER == MainFraimClass.CHANGE_CHROME_BROWSER) {
+                helperClass.printToFileAndConsoleInformation(fileToWriteLogsOfTesting, "WORK: try to get new ChromeDriver");
                 webDriver = new ChromeDriver();
             } else {
+                helperClass.printToFileAndConsoleInformation(fileToWriteLogsOfTesting, "WORK: try to get new FirefoxDriver");
                 webDriver = new FirefoxDriver();
             }
             
@@ -266,13 +303,51 @@ public class SchemasClass {
             webDriver.findElement(By.xpath("/html/body/div[1]/div[1]/div/div/main/div/div/div/div[2]/div/div/div[1]/div[1]/div[2]/div/header/div/button[2]")).click();
             helperClass.printToFileAndConsoleInformation(fileToWriteLogsOfTesting, "Work: END");            
             Thread.sleep(15000);
-            } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            helperClass.printToFileAndConsoleInformation(fileToWriteErrorLogOfTesting, "ERROR: Error in main try block of SchemasClass"); 
-        } finally {
-            webDriver.close();
-            webDriver.quit();
-        }
+            } catch (NullPointerException nex) {
+                helperClass.printToFileAndConsoleInformation(fileToWriteLogsOfTesting, "Work: NullPointerException ERROR!");
+                helperClass.printToFileAndConsoleInformation(fileToWriteLogsOfTesting, nex.getMessage());
+                helperClass.printToFileAndConsoleInformation(fileToWriteLogsOfTesting, nex.toString());
+                helperClass.printToFileAndConsoleInformation(fileToWriteLogsOfTesting, nex.getLocalizedMessage());
+            }
+        
+            catch (InterruptedException Iex) {            
+                helperClass.printToFileAndConsoleInformation(fileToWriteErrorLogOfTesting, "ERROR: InterruptedException IN SchemasClass"); 
+                helperClass.printToFileAndConsoleInformation(fileToWriteErrorLogOfTesting, Iex.getMessage());
+                helperClass.printToFileAndConsoleInformation(fileToWriteLogsOfTesting, Iex.toString());
+                helperClass.printToFileAndConsoleInformation(fileToWriteLogsOfTesting, Iex.getLocalizedMessage()); 
+            }
+        
+            catch (Exception  | Error ex) {            
+                helperClass.printToFileAndConsoleInformation(fileToWriteErrorLogOfTesting, "ERROR: Error in main try block of SchemasClass"); 
+                helperClass.printToFileAndConsoleInformation(fileToWriteErrorLogOfTesting, ex.getMessage()); 
+                helperClass.printToFileAndConsoleInformation(fileToWriteLogsOfTesting, ex.toString());
+                helperClass.printToFileAndConsoleInformation(fileToWriteLogsOfTesting, ex.getLocalizedMessage());
+            }
+            
+            catch (Throwable t){
+                    JOptionPane.showMessageDialog(MainFraimClass.frameStat, "Throwable");
+                    JOptionPane.showMessageDialog(MainFraimClass.frameStat, t.getMessage());
+            } 
+        
+            finally {
+                webDriver.close();
+                webDriver.quit();
+            }   
+    }
+
+    private void prepareSystemData() {
+//        if (osName.contains("Linux")) {
+//            pathToLogFileFolder = "./logs/";
+//            System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");      
+//            System.setProperty("webdriver.gecko.driver", "/usr/bin/geckodriver");
+//            
+//        } else if (osName.contains("Windows")) {
+//            pathToLogFileFolder = "C:\\users\\public\\documents\\logs\\";                        
+//            System.setProperty("webdriver.chrome.driver", "C:\\users\\public\\documents\\chromedriver.exe");
+//            System.setProperty("webdriver.gecko.driver", "C:\\users\\public\\documents\\geckodriver.exe");
+//            
+//        }
+        
     }
     
     

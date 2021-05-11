@@ -5,9 +5,14 @@
  */
 package com.mycompany.perscriptumtest;
 
+import com.solidsolutions.test.CandidatesClass;
+import com.solidsolutions.test.CompaniesClass;
 import com.solidsolutions.test.HelperClass;
+import com.solidsolutions.test.LocationsClass;
 import com.solidsolutions.test.SchemasClass;
 import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -32,7 +37,8 @@ public class MainFraimClass extends javax.swing.JFrame {
     public File fileToWriteLogsOfTesting;
     public File fileToWriteErrorLogOfTesting;
     public String dateTimeOfSession;
-    private JFrame frame = null;
+    public JFrame frame = null;
+    public static JFrame frameStat = null;
     
     /**
      * Creates new form MainFraimClass
@@ -43,11 +49,17 @@ public class MainFraimClass extends javax.swing.JFrame {
         bgroup.add(jRadioButtonAllCandidates);
         bgroup.add(jRadioButtonRndCandidate);
         bgroup.add(jRadioButtonShema);
+        bgroup.add(jRadioButtonLocations);
+        bgroup.add(jRadioButtonCreateCompany);
+        bgroup.add(jRadioButtonAllCreationTests);
         fillData();
         //frame = new JFrame();
         frame = this;
+        frame.setTitle("Solid Solutions site tester");
+        setTextInInfoLabel();
         
-        JOptionPane.showMessageDialog(frame, "START");
+       
+        //JOptionPane.showMessageDialog(frame, "START");
     }
 
     /**
@@ -66,12 +78,19 @@ public class MainFraimClass extends javax.swing.JFrame {
         jRadioButtonShema = new javax.swing.JRadioButton();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jRadioButtonLocations = new javax.swing.JRadioButton();
+        jRadioButtonCreateCompany = new javax.swing.JRadioButton();
+        jRadioButtonAllCreationTests = new javax.swing.JRadioButton();
         jPanel2 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextAreaInformation = new javax.swing.JTextArea();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -88,7 +107,13 @@ public class MainFraimClass extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("jLabel1");
+        jLabel1.setText("Result of work");
+
+        jRadioButtonLocations.setText("Create Location");
+
+        jRadioButtonCreateCompany.setText("Create Company");
+
+        jRadioButtonAllCreationTests.setText("Run all tests above one by one automatically");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -98,15 +123,18 @@ public class MainFraimClass extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 121, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jRadioButtonAllCreationTests)
+                            .addComponent(jRadioButtonCreateCompany)
+                            .addComponent(jRadioButtonLocations)
                             .addComponent(jRadioButtonRndCandidate)
                             .addComponent(jRadioButtonAllCandidates)
                             .addComponent(jRadioButtonShema))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 121, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -118,7 +146,13 @@ public class MainFraimClass extends javax.swing.JFrame {
                 .addComponent(jRadioButtonAllCandidates)
                 .addGap(18, 18, 18)
                 .addComponent(jRadioButtonShema)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 270, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jRadioButtonLocations)
+                .addGap(18, 18, 18)
+                .addComponent(jRadioButtonCreateCompany)
+                .addGap(18, 18, 18)
+                .addComponent(jRadioButtonAllCreationTests)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 161, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jLabel1))
@@ -140,6 +174,33 @@ public class MainFraimClass extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Other tests", jPanel2);
 
+        jTextAreaInformation.setEditable(false);
+        jTextAreaInformation.setColumns(5);
+        jTextAreaInformation.setRows(5);
+        jTextAreaInformation.setTabSize(5);
+        jTextAreaInformation.setWrapStyleWord(true);
+        jTextAreaInformation.setAutoscrolls(false);
+        jScrollPane1.setViewportView(jTextAreaInformation);
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 537, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Info", jPanel3);
+
         jMenu1.setText("File");
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_MASK));
@@ -157,6 +218,15 @@ public class MainFraimClass extends javax.swing.JFrame {
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Help");
+
+        jMenuItem2.setText("About");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem2);
+
         jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
@@ -191,27 +261,99 @@ public class MainFraimClass extends javax.swing.JFrame {
         String message = "";
         if (jRadioButtonRndCandidate.isSelected()) {
             message = "Start random candidate creation test";
-            
-        } else if (jRadioButtonAllCandidates.isSelected()) {
-            message = "Start ALL 4 candidates creation test";
-        } else if (jRadioButtonShema.isSelected()) {
-            message = "Start Shema creation test";
+            helperClass.printToFileAndConsoleInformation(fileToWriteLogsOfTesting, "Work: " + message);   
             Thread t = new Thread() {
                 public void run() {
-                    SchemasClass schemasClass = new SchemasClass(pathToLogFile, osName);
+                    CandidatesClass candidatesClass = new CandidatesClass(pathToLogFile, osName);                    
                     try {
-                    schemasClass.createSchema();
-                    } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(frame, "Error");
+                        String[] strarr = new String[2];
+                        candidatesClass.createCandidate();
+                    } catch (Exception | Error ex) {
+                        helperClass.printToFileAndConsoleInformation(fileToWriteLogsOfTesting, "Work: MainFraimClass ERROR!");
+                        helperClass.printToFileAndConsoleInformation(fileToWriteLogsOfTesting, ex.getMessage());
                     }
                 }
             };
             t.start();
+        } else if (jRadioButtonAllCandidates.isSelected()) {
+            message = "Start ALL 4 candidates creation test";
+            CandidatesClass[] candidatesClassArr = new CandidatesClass[4];
+            Thread t = new Thread() {
+                public void run() {   
+                    for (int i = 0; i < 4; i++) {
+                        candidatesClassArr[i] = new CandidatesClass(pathToLogFile, osName, (i + 1));
+                        try {
+                            candidatesClassArr[i].createCandidate();
+                        } catch (Exception | Error ex) {
+                            helperClass.printToFileAndConsoleInformation(fileToWriteLogsOfTesting, "Work: MainFraimClass ERROR!");
+                            helperClass.printToFileAndConsoleInformation(fileToWriteLogsOfTesting, ex.getMessage());
+                        }
+                    }
+                }
+            };
+            t.start();
+        } else if (jRadioButtonShema.isSelected()) {
+            message = "Start Shema creation test";            
+            helperClass.printToFileAndConsoleInformation(fileToWriteLogsOfTesting, "Work: " + message);   
+            Thread t = new Thread() {
+                public void run() {
+                    SchemasClass schemasClass = new SchemasClass(pathToLogFile, osName);                    
+                    try {
+                        String[] strarr = new String[2];
+                        schemasClass.createSchema();                    
+                    } catch (Exception | Error ex) {
+                        helperClass.printToFileAndConsoleInformation(fileToWriteLogsOfTesting, "Work: MainFraimClass ERROR!");
+                        helperClass.printToFileAndConsoleInformation(fileToWriteLogsOfTesting, ex.getMessage());
+                    }
+                }
+            };
+            t.start();
+        } else if (jRadioButtonLocations.isSelected()) {
+            message = "Start Location creation test";            
+            helperClass.printToFileAndConsoleInformation(fileToWriteLogsOfTesting, "Work: " + message);   
+            Thread t = new Thread() {
+                public void run() {
+                    LocationsClass locationsClass = new LocationsClass(pathToLogFile, osName);                    
+                    try {
+                        String[] strarr = new String[2];
+                        locationsClass.createLocation();
+                    } catch (Exception | Error ex) {
+                        helperClass.printToFileAndConsoleInformation(fileToWriteLogsOfTesting, "Work: MainFraimClass ERROR!");
+                        helperClass.printToFileAndConsoleInformation(fileToWriteLogsOfTesting, ex.getMessage());
+                    }
+                }
+            };
+            t.start();
+        } else if (jRadioButtonCreateCompany.isSelected()) {
+            message = "Start Company creation test";            
+            helperClass.printToFileAndConsoleInformation(fileToWriteLogsOfTesting, "Work: " + message);   
+            Thread t = new Thread() {
+                public void run() {
+                    CompaniesClass companiesClass = new CompaniesClass(pathToLogFile, osName);                    
+                    try {
+                        String[] strarr = new String[2];
+                        companiesClass.createCompany();
+                    } catch (Exception | Error ex) {
+                        helperClass.printToFileAndConsoleInformation(fileToWriteLogsOfTesting, "Work: MainFraimClass ERROR!");
+                        helperClass.printToFileAndConsoleInformation(fileToWriteLogsOfTesting, ex.getMessage());
+                    }
+                }
+            };
+            t.start();
+        } else if (jRadioButtonAllCreationTests.isSelected()) {
+            message = "Start All creation tests together";            
+            helperClass.printToFileAndConsoleInformation(fileToWriteLogsOfTesting, "Work: " + message);   
+            startAllCreationTests();
         } else {
             message = "Empy choice";
-        }
+        }//
         jLabel1.setText(message);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(frame, "Solid Solutions site tester. \nAll rights reserved.");
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -256,12 +398,19 @@ public class MainFraimClass extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JRadioButton jRadioButtonAllCandidates;
+    private javax.swing.JRadioButton jRadioButtonAllCreationTests;
+    private javax.swing.JRadioButton jRadioButtonCreateCompany;
+    private javax.swing.JRadioButton jRadioButtonLocations;
     private javax.swing.JRadioButton jRadioButtonRndCandidate;
     private javax.swing.JRadioButton jRadioButtonShema;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTextArea jTextAreaInformation;
     // End of variables declaration//GEN-END:variables
 
     private void fillData() {
@@ -270,26 +419,16 @@ public class MainFraimClass extends javax.swing.JFrame {
         dateTimeOfSession = helperClass.getDateInStringForWindowsLinux(); 
         
         osName = System.getProperty("os.name");
+        //JOptionPane.showMessageDialog(frame, "osName=" + osName);
         File theDirectoryForLogFiles = null;
         if (osName.contains("Linux")) {
-//            System.out.println("OS Linux detected. Trying to create a folder for log files in the same folder as the executable file");
-//            System.out.println("Please make sure the appropriate chromedriver exists along the path /usr/bin/chromedriver");    
-//            System.out.println("Please make sure the appropriate geckodriver exists along the path /usr/bin/geckodriver");  
-//            System.out.println("Please make sure the appropriate chromedriver exists in the folder with jar file"); 
-//            System.out.println("Visit URL https://chromedriver.chromium.org/downloads to download if you have no chromedriver!");             
-            pathToLogFile = "./logs/";                        
-            
+            pathToLogFile = "./logs/";            
             System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");      
-            System.setProperty("webdriver.gecko.driver", "/usr/bin/geckodriver");
-            
+            System.setProperty("webdriver.gecko.driver", "/usr/bin/geckodriver");            
         } else if (osName.contains("Windows")) {
-//            System.out.println("Please make sure the appropriate chromedriver exists along the path C:\\users\\public\\documents\\chromedriver.exe"); 
-//            System.out.println("OS Windows detected, try to create log folder in C:\\users\\public\\documents\\logs");
             pathToLogFile = "C:\\users\\public\\documents\\logs\\";            
-            
             System.setProperty("webdriver.chrome.driver", "C:\\users\\public\\documents\\chromedriver.exe");
-            System.setProperty("webdriver.gecko.driver", "C:\\users\\public\\documents\\geckodriver.exe");
-            
+            System.setProperty("webdriver.gecko.driver", "C:\\users\\public\\documents\\geckodriver.exe");            
         } else {
             pathToLogFile = "./";
         }
@@ -313,6 +452,86 @@ public class MainFraimClass extends javax.swing.JFrame {
             //System.out.println(exx.getMessage());
             //System.out.println("Error file creation, test log will be only in terminal");
         }
-       
+        helperClass.printToFileAndConsoleInformation(fileToWriteLogsOfTesting, "Work: Start");   
+    }
+
+    private void startAllCreationTests() {
+        CandidatesClass[] candidatesClassArr = new CandidatesClass[4];
+        Thread tCandidates = new Thread() {
+                public void run() {
+                    for (int i = 0; i < 4; i++) {
+                        candidatesClassArr[i] = new CandidatesClass(pathToLogFile, osName, (i + 1));
+                        try {
+                            candidatesClassArr[i].createCandidate();
+                        } catch (Exception | Error ex) {
+                            helperClass.printToFileAndConsoleInformation(fileToWriteLogsOfTesting, "Work: MainFraimClass ERROR!");
+                            helperClass.printToFileAndConsoleInformation(fileToWriteLogsOfTesting, ex.getMessage());
+                        }
+                    }
+                }
+            };
+        tCandidates.start();    
+    
+        Thread tShema = new Thread() {
+                public void run() {
+                    SchemasClass schemasClass = new SchemasClass(pathToLogFile, osName);                    
+                    try {
+                        String[] strarr = new String[2];
+                        schemasClass.createSchema();                    
+                    } catch (Exception | Error ex) {
+                        helperClass.printToFileAndConsoleInformation(fileToWriteLogsOfTesting, "Work: MainFraimClass ERROR!");
+                        helperClass.printToFileAndConsoleInformation(fileToWriteLogsOfTesting, ex.getMessage());
+                    }
+                }
+            };
+        tShema.start();    
+            
+        Thread tLocations = new Thread() {
+                public void run() {
+                    LocationsClass locationsClass = new LocationsClass(pathToLogFile, osName);                    
+                    try {
+                        String[] strarr = new String[2];
+                        locationsClass.createLocation();
+                    } catch (Exception | Error ex) {
+                        helperClass.printToFileAndConsoleInformation(fileToWriteLogsOfTesting, "Work: MainFraimClass ERROR!");
+                        helperClass.printToFileAndConsoleInformation(fileToWriteLogsOfTesting, ex.getMessage());
+                    }
+                }
+            };
+        tLocations.start();
+        
+        Thread tCompany = new Thread() {
+                public void run() {
+                    CompaniesClass companiesClass = new CompaniesClass(pathToLogFile, osName);                    
+                    try {
+                        String[] strarr = new String[2];
+                        companiesClass.createCompany();
+                    } catch (Exception | Error ex) {
+                        helperClass.printToFileAndConsoleInformation(fileToWriteLogsOfTesting, "Work: MainFraimClass ERROR!");
+                        helperClass.printToFileAndConsoleInformation(fileToWriteLogsOfTesting, ex.getMessage());
+                    }
+                }
+            };
+            tCompany.start();
+    }
+
+    private void setTextInInfoLabel() {
+        
+        StringBuffer strBuffer = new StringBuffer();
+        strBuffer.append("To use this application make sure GoogleChromDriver and GeckoDriver are placed in the folder ");
+        if (osName.contains("Linux")) {
+            strBuffer.append("/usr/bin/");
+        } else if (osName.contains("Windows")) {
+            strBuffer.append("C:\\users\\public\\documents\\");
+        }
+        strBuffer.append(".\nMake sure that the version of the Chromedriver matches the version of the Chrome browser you have installed.\n");
+        strBuffer.append("Log files will be saved to the folder ");
+        if (osName.contains("Linux")) {
+            strBuffer.append("/logs/.");
+        } else if (osName.contains("Windows")) {
+            strBuffer.append("C:\\users\\public\\documents\\logs.");
+        }
+        jTextAreaInformation.setLineWrap(true);
+        jTextAreaInformation.setText(strBuffer.toString());
     }
 }
