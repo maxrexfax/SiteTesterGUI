@@ -9,7 +9,11 @@ import com.solidsolutions.test.CandidatesClass;
 import com.solidsolutions.test.CompaniesClass;
 import com.solidsolutions.test.HelperClass;
 import com.solidsolutions.test.LocationsClass;
+import com.solidsolutions.test.ManyRequestsClass;
+import com.solidsolutions.test.ProfileEditClass;
 import com.solidsolutions.test.SchemasClass;
+import com.solidsolutions.test.SearchCandidateClass;
+import com.solidsolutions.test.SortCandidatesClass;
 import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,6 +21,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -95,6 +100,16 @@ public class MainFraimClass extends javax.swing.JFrame {
         jRadioButtonProfileEdit = new javax.swing.JRadioButton();
         jButtonOtherTests = new javax.swing.JButton();
         jLabelResOther = new javax.swing.JLabel();
+        jTextFieldSpeedLoadLoops = new javax.swing.JTextField();
+        jTextFieldFirstPause = new javax.swing.JTextField();
+        jTextFieldIncrease = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jTextFieldSearchLoops = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jListOfUrls = new javax.swing.JList<>();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextAreaInformation = new javax.swing.JTextArea();
@@ -191,6 +206,40 @@ public class MainFraimClass extends javax.swing.JFrame {
 
         jLabelResOther.setText("Result");
 
+        jTextFieldSpeedLoadLoops.setText("10");
+
+        jTextFieldFirstPause.setText("100");
+        jTextFieldFirstPause.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldFirstPauseActionPerformed(evt);
+            }
+        });
+
+        jTextFieldIncrease.setText("100");
+        jTextFieldIncrease.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldIncreaseActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Loops (1 - 1000)");
+
+        jLabel3.setText("First pause (ms) (1 - 10 000)");
+
+        jLabel4.setText("Increase (ms) (1 - 10 000)");
+
+        jTextFieldSearchLoops.setText("10");
+
+        jLabel5.setText("Loops (1 - 10 000)");
+
+        jListOfUrls.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "exams", "candidates", "certificates", "dossiers", "assessors", "companies", "contacts", "schemes", "templates", "locations", "translations", "fields", "employees", "roles", "workflows", "settings", "profile" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jListOfUrls.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane2.setViewportView(jListOfUrls);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -198,29 +247,65 @@ public class MainFraimClass extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jRadioButtonSpeedLoad)
-                    .addComponent(jRadioButtonSorting)
-                    .addComponent(jRadioButtonSearch)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButtonOtherTests)
-                            .addComponent(jRadioButtonProfileEdit))
+                        .addComponent(jRadioButtonSearch)
+                        .addGap(47, 47, 47)
+                        .addComponent(jTextFieldSearchLoops, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33)
+                        .addComponent(jLabel5))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jButtonOtherTests)
                         .addGap(88, 88, 88)
-                        .addComponent(jLabelResOther, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(31, Short.MAX_VALUE))
+                        .addComponent(jLabelResOther, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jRadioButtonSorting)
+                    .addComponent(jRadioButtonProfileEdit)
+                    .addComponent(jRadioButtonSpeedLoad))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextFieldIncrease, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
+                            .addComponent(jTextFieldSpeedLoadLoops)
+                            .addComponent(jTextFieldFirstPause))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(37, 37, 37)
-                .addComponent(jRadioButtonSearch)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRadioButtonSearch)
+                    .addComponent(jTextFieldSearchLoops, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
                 .addGap(18, 18, 18)
                 .addComponent(jRadioButtonSorting)
                 .addGap(18, 18, 18)
+                .addComponent(jRadioButtonProfileEdit)
+                .addGap(25, 25, 25)
                 .addComponent(jRadioButtonSpeedLoad)
                 .addGap(18, 18, 18)
-                .addComponent(jRadioButtonProfileEdit)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 213, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jTextFieldSpeedLoadLoops, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(8, 8, 8)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jTextFieldFirstPause, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldIncrease, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonOtherTests)
                     .addComponent(jLabelResOther))
@@ -399,8 +484,9 @@ public class MainFraimClass extends javax.swing.JFrame {
             message = "Start All creation tests together";            
             helperClass.printToFileAndConsoleInformation(fileToWriteLogsOfTesting, "Work: " + message);   
             startAllCreationTests();
-        } else {
-            message = "Empy choice";
+        } else {    
+            message = "EMPTY CHOICE!";
+            JOptionPane.showMessageDialog(frame, message);
         }//
         jLabel1.setText(message);
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -413,15 +499,96 @@ public class MainFraimClass extends javax.swing.JFrame {
     private void jButtonOtherTestsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOtherTestsActionPerformed
         // TODO add your handling code here:
         if (jRadioButtonSearch.isSelected()) {
-            jLabelResOther.setText("Search");
+            String message = "Testing of the users Search";
+            int loops = getDataFromTextField(jTextFieldSearchLoops, 3, 10000);            
+            
+            message = message + " number of loops=" + loops;
+            jLabelResOther.setText(message);//SearchCandidateClass
+            helperClass.printToFileAndConsoleInformation(fileToWriteLogsOfTesting, "Work: " + message);  
+            final int fLoops = loops; 
+            Thread tSearch = new Thread() {
+                public void run() {
+                    SearchCandidateClass searchCandidateClass = new SearchCandidateClass(pathToLogFile, osName, fLoops);                    
+                    try {
+                        String[] strarr = new String[2];
+                        searchCandidateClass.searchCandidate();
+                    } catch (Exception | Error ex) {
+                        helperClass.printToFileAndConsoleInformation(fileToWriteLogsOfTesting, "Work: MainFraimClass ERROR!");
+                        helperClass.printToFileAndConsoleInformation(fileToWriteLogsOfTesting, ex.getMessage());
+                    }
+                }
+            };
+            tSearch.start();
         } else if (jRadioButtonSorting.isSelected()) {
-            jLabelResOther.setText("Sorting");
-        } else if (jRadioButtonSpeedLoad.isSelected()) {
+            String message = "Testing of the users Sort";
+            jLabelResOther.setText(message);         
+            helperClass.printToFileAndConsoleInformation(fileToWriteLogsOfTesting, "Work: " + message);   
+            Thread tSort = new Thread() {
+                public void run() {
+                    SortCandidatesClass sortCandidatesClass = new SortCandidatesClass(pathToLogFile, osName);                    
+                    try {
+                        String[] strarr = new String[2];
+                        sortCandidatesClass.sortCandidates();
+                    } catch (Exception | Error ex) {
+                        helperClass.printToFileAndConsoleInformation(fileToWriteLogsOfTesting, "Work: MainFraimClass ERROR!");
+                        helperClass.printToFileAndConsoleInformation(fileToWriteLogsOfTesting, ex.getMessage());
+                    }
+                }
+            };
+            tSort.start();
+        } else if (jRadioButtonSpeedLoad.isSelected()) {//ManyRequestsClass
             jLabelResOther.setText("Speed load");
+            int loops = 0, firstPause = 100, increase = 0;
+            loops = getDataFromTextField(jTextFieldSpeedLoadLoops, 1, 10000);
+            firstPause = getDataFromTextField(jTextFieldFirstPause, 1, 10000);
+            increase = getDataFromTextField(jTextFieldIncrease, 0, 10000);
+            final int numberToCheck = jListOfUrls.getSelectedIndex();
+            final int fLoops = loops;
+            final int fFirstPause = firstPause;
+            final int fIncrease = increase;
+            Thread tSpeedLoad = new Thread() {
+                public void run() {
+                    ManyRequestsClass manyRequestsClass = new ManyRequestsClass(pathToLogFile, osName, fLoops, fFirstPause, fIncrease, numberToCheck);                    
+                    try {
+                        String[] strarr = new String[2];
+                        manyRequestsClass.startTest();
+                    } catch (Exception | Error ex) {
+                        helperClass.printToFileAndConsoleInformation(fileToWriteLogsOfTesting, "Work: MainFraimClass ERROR!");
+                        helperClass.printToFileAndConsoleInformation(fileToWriteLogsOfTesting, ex.getMessage());
+                    }
+                }
+            };
+            tSpeedLoad.start();
         } else if (jRadioButtonProfileEdit.isSelected()) {
-            jLabelResOther.setText("Profile edit");
+            String message = "Testing of the profile editing";
+            jLabelResOther.setText(message);         
+            helperClass.printToFileAndConsoleInformation(fileToWriteLogsOfTesting, "Work: " + message);   
+            Thread tProfileEdit = new Thread() {
+                public void run() {
+                    ProfileEditClass profileEditClass = new ProfileEditClass(pathToLogFile, osName);                    
+                    try {
+                        String[] strarr = new String[2];
+                        profileEditClass.editProfile();
+                    } catch (Exception | Error ex) {
+                        helperClass.printToFileAndConsoleInformation(fileToWriteLogsOfTesting, "Work: MainFraimClass ERROR!");
+                        helperClass.printToFileAndConsoleInformation(fileToWriteLogsOfTesting, ex.getMessage());
+                    }
+                }
+            };
+            tProfileEdit.start();
+        } else {
+            jLabelResOther.setText("EMPTY CHOICE!"); 
+            JOptionPane.showMessageDialog(frame, "EMPTY CHOICE!");
         }
     }//GEN-LAST:event_jButtonOtherTestsActionPerformed
+
+    private void jTextFieldFirstPauseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldFirstPauseActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldFirstPauseActionPerformed
+
+    private void jTextFieldIncreaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldIncreaseActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldIncreaseActionPerformed
 
     /**
      * @param args the command line arguments
@@ -462,7 +629,12 @@ public class MainFraimClass extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonOtherTests;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabelResOther;
+    private javax.swing.JList<String> jListOfUrls;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -483,8 +655,13 @@ public class MainFraimClass extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButtonSorting;
     private javax.swing.JRadioButton jRadioButtonSpeedLoad;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextArea jTextAreaInformation;
+    private javax.swing.JTextField jTextFieldFirstPause;
+    private javax.swing.JTextField jTextFieldIncrease;
+    private javax.swing.JTextField jTextFieldSearchLoops;
+    private javax.swing.JTextField jTextFieldSpeedLoadLoops;
     // End of variables declaration//GEN-END:variables
 
     private void fillData() {
@@ -607,5 +784,22 @@ public class MainFraimClass extends javax.swing.JFrame {
         }
         jTextAreaInformation.setLineWrap(true);
         jTextAreaInformation.setText(strBuffer.toString());
+    }
+
+    private int getDataFromTextField(JTextField jTextFieldToGetData, int min, int max) {
+        int result = 0;
+            try {
+                result = Integer.parseInt(jTextFieldToGetData.getText());
+            } catch (Exception | Error ex) {
+                result = (min + 1);
+                jTextFieldToGetData.setText("" + result);
+                JOptionPane.showMessageDialog(frame, "Error! Only numeric! Set to " + result);
+            }
+            if (result < min || result > max) {
+                result = (min + 1);
+                jTextFieldToGetData.setText("" + result);
+                JOptionPane.showMessageDialog(frame, "Error! Set to " + result);
+            }
+        return result;
     }
 }
